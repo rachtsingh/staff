@@ -3,7 +3,7 @@ use crate::{
     render::Renderer,
 };
 use svg::Node;
-use text_svg::Glpyh;
+use text_svg::Glyph;
 
 pub struct NoteHead {
     pub index: i64,
@@ -28,9 +28,9 @@ impl NoteHead {
             DurationKind::Half => '𝅗',
             DurationKind::Whole => '𝅝',
         };
-        let glyph = Glpyh::new(&renderer.font, c, 75.);
+        let glyph = Glyph::new(&renderer.font, c, 75.);
         let dot_glyph = if duration.is_dotted {
-            Some(Glpyh::new(&renderer.font, '.', 75.))
+            Some(Glyph::new(&renderer.font, '.', 75.))
         } else {
             None
         };
@@ -42,8 +42,8 @@ impl NoteHead {
         &self,
         note_x: f64,
         top: f64,
-        glyph: &Glpyh,
-        dot_glyph: Option<&Glpyh>,
+        glyph: &Glyph,
+        dot_glyph: Option<&Glyph>,
         renderer: &Renderer,
         node: &mut impl Node,
     ) {

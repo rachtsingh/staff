@@ -7,7 +7,7 @@ use crate::{
     Key, Natural,
 };
 use svg::Node;
-use text_svg::Glpyh;
+use text_svg::Glyph;
 
 pub struct LedgerLine {
     pub note: i64,
@@ -37,7 +37,7 @@ impl Draw for LedgerLine {
 }
 
 pub struct ChordAccidental<'a> {
-    pub glyph: Glpyh<'a>,
+    pub glyph: Glyph<'a>,
     pub index: i64,
     pub x: f64,
     pub is_flat: bool,
@@ -51,7 +51,7 @@ impl<'a> ChordAccidental<'a> {
             Accidental::Flat => ('♭', true),
             _ => todo!(),
         };
-        let glyph = Glpyh::new(&renderer.font, c, renderer.accidental_size as _);
+        let glyph = Glyph::new(&renderer.font, c, renderer.accidental_size as _);
 
         Self {
             glyph,
@@ -341,7 +341,7 @@ impl<'r> MeasureItem<'r> {
             MeasureItemKind::Rest { duration } => match duration.kind {
                 DurationKind::Quarter => {
                     node.append(
-                        Glpyh::new(&renderer.font, '𝄽', 75.)
+                        Glyph::new(&renderer.font, '𝄽', 75.)
                             .path((x + renderer.note_rx) as _, renderer.note_ry as f32 * 3.),
                     );
                 }
@@ -379,9 +379,9 @@ impl<'r> MeasureItem<'r> {
                     DurationKind::Half => '𝅗',
                     DurationKind::Whole => '𝅝',
                 };
-                let glyph = Glpyh::new(&renderer.font, c, 75.);
+                let glyph = Glyph::new(&renderer.font, c, 75.);
                 let dot_glyph = if duration.is_dotted {
-                    Some(Glpyh::new(&renderer.font, '.', 75.))
+                    Some(Glyph::new(&renderer.font, '.', 75.))
                 } else {
                     None
                 };

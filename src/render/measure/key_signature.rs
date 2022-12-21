@@ -5,10 +5,10 @@ use crate::{
     Key,
 };
 use svg::Node;
-use text_svg::Glpyh;
+use text_svg::Glyph;
 
 pub struct KeySignature<'r> {
-    pub glyph: Glpyh<'r>,
+    pub glyph: Glyph<'r>,
     pub accidentals: Vec<NoteHead>,
 }
 
@@ -19,7 +19,7 @@ impl<'r> KeySignature<'r> {
         // TODO
         let spacing = 1.;
         let c = if key.is_sharp() { '♯' } else { '♭' };
-        let accidental_glyph = Glpyh::new(&renderer.font, c, (renderer.accidental_size) as _);
+        let accidental_glyph = Glyph::new(&renderer.font, c, (renderer.accidental_size) as _);
 
         let accidentals = key
             .into_iter()

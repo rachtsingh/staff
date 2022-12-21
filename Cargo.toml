@@ -26,7 +26,7 @@ anyhow = { version = "1.0.61", optional = true }
 thiserror = "1.0"
 rusttype = { version = "0.9.3", optional = true }
 svg = { version = "0.12.1", optional = true }
-text-svg = { version = "0.1.2", optional = true }
+text-svg = { git = "https://github.com/rachtsingh/text-svg", optional = true }
 
 [dependencies.clap]
 version = "4.0.18"
