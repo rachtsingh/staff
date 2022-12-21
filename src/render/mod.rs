@@ -1,10 +1,5 @@
 //! Sheet music engraving
-
-use font_kit::{
-    family_name::FamilyName, handle::Handle, properties::Properties, source::SystemSource,
-};
 use rusttype::Font;
-use std::{fs::File, io::Read};
 use svg::{
     node::element::{Line, Rectangle},
     Document, Node,
@@ -35,27 +30,8 @@ pub struct Renderer {
 
 impl Default for Renderer {
     fn default() -> Self {
-        let handle = SystemSource::new()
-            .select_best_match(
-                &[
-                    FamilyName::Title("Noto Music".to_owned()),
-                    FamilyName::Serif,
-                ],
-                &Properties::new(),
-            )
-            .unwrap();
-
-        let font = match handle {
-            Handle::Path { path, font_index } => {
-                let mut file = File::open(path).unwrap();
-                let mut buf = Vec::new();
-                file.read_to_end(&mut buf).unwrap();
-                Font::try_from_vec_and_index(buf, font_index).unwrap()
-            }
-            Handle::Memory { bytes, font_index } => {
-                Font::try_from_vec_and_index(bytes.to_vec(), font_index).unwrap()
-            }
-        };
+        let font_data = include_bytes!("../../NotoMusic.ttf");
+        let font = Font::try_from_bytes(font_data as &[u8]).expect("Error loading font Noto Music from file.");
 
         Self {
             document_padding: 20.,

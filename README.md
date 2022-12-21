@@ -1,3 +1,6 @@
+# Notes
+This is a fork of staff.rs to hard code a path to NotoMusic (included at build time), so we don't have to use font-kit, which doesn't build on the wasm target.
+
 # Staff
 [![crate](https://img.shields.io/crates/v/staff.svg)](https://crates.io/crates/staff)
 [![documentation](https://docs.rs/staff/badge.svg)](https://docs.rs/staff)
